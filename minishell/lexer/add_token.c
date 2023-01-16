@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   add_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/11 22:08:41 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/11 22:08:41 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	executor()
-// {
-// 	int (*built_in)(t_cmd *) = get_builtin(cmd->args[0]);
-//     if (built_in)
-//         built_in(cmd);
-// }
+void	add_token(t_token **token, t_token *new)
+{
+	t_token	*last;
+
+	if (!new)
+		return ;
+	if (!*token)
+	{
+		*token = new;
+		return ;
+	}
+	last = *token;
+	while (last->next)
+		last = last->next;
+	last->next = new;
+}

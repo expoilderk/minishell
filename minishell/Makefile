@@ -1,21 +1,24 @@
 NAME			=	minishell
 
-BUILTIN_SRC		=	$(addprefix built-in/, pwd.c)
+UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c)
+
+BUILTIN_SRC		=	$(addprefix built-in/, built_in.c pwd.c echo.c cd.c env.c exit.c export.c unset.c)
+
+SIGNALS_SRC		=	$(addprefix signals/, signals.c sighandler.c)
 
 PROMPT_SRC		=	$(addprefix prompt/, prompt.c)
 
-PARSER_SRC		=	$(addprefix parser/, parser.c)
+PARSER_SRC		=	$(addprefix parser/, parser.c interpreter.c cmd.c)
 
-LEXER_SRC		=	$(addprefix lexer/, lexer.c)
+LEXER_SRC		=	$(addprefix lexer/, lexer.c lst_token.c create_token.c)
 
 EXECUTOR_SRC	=	$(addprefix executor/, executor.c)
 
 MINISHELL_SRC	=	minishell.c
 
 OBJ				=	$(BUILTIN_SRC:.c=.o) $(PROMPT_SRC:.c=.o) $(PARSER_SRC:.c=.o) \
-					$(LEXER_SRC:.c=.o) $(EXECUTOR_SRC:.c=.o) $(MINISHELL_SRC:.c=.o)
-
-LIBFT_PATH		=	libft
+					$(LEXER_SRC:.c=.o) $(EXECUTOR_SRC:.c=.o) $(MINISHELL_SRC:.c=.o) \
+					$(UTILS_SRC:.c=.o) $(SIGNALS_SRC:.c=.o)
 
 CC				=	cc
 
@@ -25,18 +28,14 @@ RM				=	rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_PATH)/libft.a
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_PATH)/libft.a -lreadline -o $(NAME)
-
-$(LIBFT_PATH)/libft.a:
-	make -C $(LIBFT_PATH)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -lreadline -o $(NAME)
 
 clean:
-	make -C $(LIBFT_PATH) clean
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT_PATH)/libft.a
+	$(RM) $(NAME)
 
 re: fclean all
 

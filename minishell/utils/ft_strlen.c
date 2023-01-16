@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/11 21:35:11 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/11 21:35:11 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	executor()
-// {
-// 	int (*built_in)(t_cmd *) = get_builtin(cmd->args[0]);
-//     if (built_in)
-//         built_in(cmd);
-// }
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}

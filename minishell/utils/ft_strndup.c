@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/11 21:20:40 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/11 21:20:40 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	executor()
-// {
-// 	int (*built_in)(t_cmd *) = get_builtin(cmd->args[0]);
-//     if (built_in)
-//         built_in(cmd);
-// }
+char	*ft_strndup(char *str, size_t len)
+{
+	size_t	i;
+	size_t	slen;
+	char	*new_str;
+
+	if (!str)
+		return (NULL);
+	slen = ft_strlen(str);
+	if (slen > len)
+		slen = len;
+	new_str = malloc(sizeof(char) * (slen + 1));
+	if (!new_str)
+		return (NULL);
+	i = -1;
+	while (++i < slen)
+		new_str[i] = str[i];
+	new_str[i] = '\0';
+	return (new_str);
+}

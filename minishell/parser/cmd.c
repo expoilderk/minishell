@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/13 15:26:18 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/13 15:26:18 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	executor()
-// {
-// 	int (*built_in)(t_cmd *) = get_builtin(cmd->args[0]);
-//     if (built_in)
-//         built_in(cmd);
-// }
+void	next_cmd(t_token **token)
+{
+	t_token	*tmp;
+
+	while ((*token)->type != END)
+	{
+		tmp = *token;
+		*token = (*token)->next;
+		free(tmp->token);
+		free(tmp);
+	}
+	tmp = *token;
+	*token = (*token)->next;
+	free(tmp->token);
+	free(tmp);
+}
+
+//create the cmd struct, opening redirects or heredocs
+t_cmd	*create_cmd(t_token *token)
+{
+	if (!token)
+		return (NULL);
+	return (NULL);
+}

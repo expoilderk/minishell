@@ -12,23 +12,44 @@
 
 #include "../minishell.h"
 
-//"echo \"abcd efg\" >>   txt|rev | cat -e > test | grep a test"
-
-//"echo" "abcd efg" ">>" "txt" "|" "rev" "|" "cat" "-e" "|" "grep" "a"
-
-char **lexer(char *line)
+static char	*skip_whitespaces(char *str)
 {
-	int i;
-	char **split;
-
-	split = ft_split(line);
-	i = 0;
-	while (split[i])
-	{
-		// split[i] = ft_strtrim(split[i], "'\"");
-		ft_trim(split[i]);
-		printf("%s$\n", split[i]);
-		i++;
-	}
-	return (NULL);
+	while (*str && ft_strchr(" \n\t", *str))
+		str++;
+	return (str);
 }
+
+t_token	*lexer(char *line)
+{
+	t_token	*new;
+	t_token	*token;
+
+	if (!line)
+		return (NULL);
+	token = NULL;
+	line = skip_whitespaces(line);
+	while (*line)
+	{
+		new = new_token(get_token(line));
+		add_token(&token, new);
+		line += ft_strlen(new->token);
+		line = skip_whitespaces(line);
+	}
+	add_token(&token, new_token(NULL));
+	return (token);
+}
+
+// int	main(int argc, char **argv)
+// {
+// 	t_token	*token;
+
+// 	token = lexer(argv[1]);
+// 	if (!token)
+// 		printf("null\n");
+// 	while (token)
+// 	{
+// 		printf("%s$ * %i$\n", token->token, token->type);
+// 		token = token->next;
+// 	}
+// 	return (0);
+// }

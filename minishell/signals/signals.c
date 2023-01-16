@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
+/*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 13:55:11 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/13 20:06:23 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/14 12:31:19 by mreis-me          #+#    #+#             */
+/*   Updated: 2023/01/14 13:47:50 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	pwd(t_cmd *cmd)
+void	signals(void)
 {
-	char	*str;
-
-	(void)cmd;
-	str = getcwd(NULL, 0);
-	printf("%s\n", str);
-	free(str);
-	return (EXIT_SUCCESS);
+	signal(SIGINT, sighandler);
+	signal(SIGQUIT, SIG_IGN);
 }

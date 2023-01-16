@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 13:55:11 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/13 20:06:23 by gguedes          ###   ########.fr       */
+/*   Created: 2022/05/14 22:49:55 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/11 21:44:40 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	pwd(t_cmd *cmd)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	char	*str;
+	size_t	i;
 
-	(void)cmd;
-	str = getcwd(NULL, 0);
-	printf("%s\n", str);
-	free(str);
-	return (EXIT_SUCCESS);
+	if (!n || !s1 || !s2)
+		return (0);
+	i = -1;
+	n--;
+	while (++i < n && s1[i] && s2[i])
+		if (s1[i] != s2[i])
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+	return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
 }
