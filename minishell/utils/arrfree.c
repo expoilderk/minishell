@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   arrfree.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/15 13:00:13 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/15 13:00:13 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int executor(t_cmd *cmd, char **env)
+void *arrfree(char **arr)
 {
-    int (*built_in)(t_cmd *) = get_builtin(cmd->args[0]);
-    if (built_in)
-        built_in(cmd);
+	int i;
+
+	if (!arr)
+		return (NULL);
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
+	return (NULL);
 }

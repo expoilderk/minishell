@@ -1,0 +1,9 @@
+{
+    "files.refactoring.autoSave": false,
+    "path-intellisense.autoSlashAfterDirectory": true,
+    "files.autoSave": "onFocusChange",
+    "files.associations": {
+        "minishell.h": "c",
+        "readline.h": "c"
+    }
+}

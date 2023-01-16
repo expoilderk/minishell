@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	env(t_cmd *cmd)
+int env(t_cmd *cmd)
 {
 	(void)cmd;
 	return (EXIT_SUCCESS);

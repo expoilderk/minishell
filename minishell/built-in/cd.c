@@ -12,19 +12,17 @@
 
 #include "../minishell.h"
 
-int	cd(t_cmd *cmd)
+int cd(t_cmd *cmd)
 {
-	char	cwd[1024];
-	char	*last_dir;
+	char cwd[1024];
+	char *last_dir;
 
 	if (cmd->args[1] == NULL || (ft_strncmp(cmd->args[1], "~", -1) == 0))
 	{
 		// handle "cd" and "cd ~"
-		if (chdir(getenv("HOME")) != 0) // Reescrever minha propria getenv
-		{
+		if (chdir(getenv("HOME")) != 0)
 			perror("cd");
-			return (EXIT_FAILURE);
-		}
+		return (EXIT_FAILURE);
 	}
 	else if (ft_strncmp(cmd->args[1], "-", -1) == 0)
 	{
@@ -48,10 +46,9 @@ int	cd(t_cmd *cmd)
 	}
 	getcwd(cwd, sizeof(cwd));
 	setenv("OLDPWD", getenv("PWD"), 1); // Reescrever minha propria setenv e getenv
-	setenv("PWD", cwd, 1); // Reescrever minha propria setenv
+	setenv("PWD", cwd, 1);				// Reescrever minha propria setenv
 	return (EXIT_SUCCESS);
 }
-
 
 /*
 Este código é uma função chamada "cd" que recebe um ponteiro para uma estrutura

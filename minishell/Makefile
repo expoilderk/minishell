@@ -1,6 +1,6 @@
 NAME			=	minishell
 
-UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c)
+UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c arrfree.c)
 
 BUILTIN_SRC		=	$(addprefix built-in/, built_in.c pwd.c echo.c cd.c env.c exit.c export.c unset.c)
 
@@ -14,11 +14,13 @@ LEXER_SRC		=	$(addprefix lexer/, lexer.c lst_token.c create_token.c)
 
 EXECUTOR_SRC	=	$(addprefix executor/, executor.c)
 
+ENV_SRC			=	$(addprefix env/, environ.c)
+
 MINISHELL_SRC	=	minishell.c
 
 OBJ				=	$(BUILTIN_SRC:.c=.o) $(PROMPT_SRC:.c=.o) $(PARSER_SRC:.c=.o) \
 					$(LEXER_SRC:.c=.o) $(EXECUTOR_SRC:.c=.o) $(MINISHELL_SRC:.c=.o) \
-					$(UTILS_SRC:.c=.o) $(SIGNALS_SRC:.c=.o)
+					$(UTILS_SRC:.c=.o) $(SIGNALS_SRC:.c=.o) $(ENV_SRC:.c=.o)
 
 CC				=	cc
 
