@@ -6,7 +6,7 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:33:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/14 16:20:39 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:49:52 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_token
 typedef struct s_cmd
 {
 	char **args;
+	char **env;
 	int (*built_in)(struct s_cmd *);
 	int in;
 	int out;
@@ -46,20 +47,23 @@ typedef struct s_builtin
 	int (*func)(t_cmd *);
 } t_builtin;
 
-// utils
-char *ft_strchr(char *s, int c);
-int ft_strlen(char *str);
-int ft_strncmp(char *s1, char *s2, size_t n);
-char *ft_strndup(char *str, size_t len);
-char *ft_strjoin(char *s1, char *s2, int option);
-int ft_isspace(int c);
-int ft_whitespace(char *str);
-void *arrfree(char **arr);
-// env
-int envlen(char **env);
-int env_namelen(char *env);
-char *get_env(char *name, char **env);
-char **envdup(char **env);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_strlen(char *str);
+int		ft_strncmp(char *s1, char *s2, size_t n);
+char	*ft_strchr(char *s, int c);
+char	*ft_strndup(char *str, size_t len);
+char	*ft_strjoin(char *s1, char *s2, int option);
+int		ft_isspace(int c);
+int		ft_whitespace(char *str);
+void	*arrfree(char **arr);
+
+//env
+int		envlen(char	**env);
+int		env_namelen(char *env);
+char	*get_env(char *name, char **env);
+char	**envdup(char **env);
 
 // builtin
 int pwd(t_cmd *cmd);
