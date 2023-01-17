@@ -6,7 +6,7 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:33:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/16 20:49:52 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:58:15 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void next_cmd(t_token **token);
 t_cmd *create_cmd(t_token *token);
 
 // executor
-int executor(t_cmd *cmd, char **env);
+int executor(t_cmd *cmd, char **env, int flag);
 
 #endif
