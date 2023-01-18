@@ -6,19 +6,19 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 11:50:35 by mreis-me          #+#    #+#             */
-/*   Updated: 2023/01/18 16:33:55 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:10:37 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int is_valid(char *str)
+static int	validate(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_isalpha(str[0]))
-			return (0);
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]))
@@ -30,34 +30,8 @@ int is_valid(char *str)
 		i++;
 	}
 	if (str[i] != '=')
-		return -1;
+		return (-1);
 	return (1);
-}
-
-
-char *ft_strfind(char *str, char c)
-{
-	char *res;
-	int len;
-	int size;
-
-	len = 0;
-	while (str[len])
-	{
-		if (str[len] == c)
-			break;
-		len++;
-	}
-	len++;
-	res = malloc(sizeof(char) * len+1);
-	size = 0;
-	while (size < len)
-	{
-		res[size] = str[size];
-		size++;
-	}
-	res[size] = '\0';
-	return (res);
 }
 
 int	export(t_cmd *cmd)
@@ -70,26 +44,26 @@ int	export(t_cmd *cmd)
 	while (cmd->args[i])
 	{
 		// Faz a validação
-		if (!is_valid(cmd->args[i]))
+		if (!validate(cmd->args[i]))
 			printf("export: '%s': não é um identificador válido\n", cmd->args[i]);
-		else if (is_valid(cmd->args[i]) == 1)
+		else if (validate(cmd->args[i]) == 1)
 		{
-			// Atualiza variavel de ambiente
-			char *str = ft_strfind(cmd->args[i], '=');
+			// Atualiza variavel de ambiente, criar func menor
+			char *str = get_var(cmd->args[i], '=', 1);
 			if(get_env(str, cmd->env))
 			{
 				len = 0;
 				export = envdup(cmd->env);
 				while (export[len])
 				{
-					if (!ft_strncmp(ft_strfind(export[len], '='), str, -1))
+					if (!ft_strncmp(get_var(export[len], '=', 1), str, -1))
 						export[len] = ft_strndup(cmd->args[i], -1);
 					len++;
 				}
 				len = envlen(export);
 				memcpy(cmd->env, export, sizeof(char*) * (len + 1)); //Usar minha memcpy
 			}
-			else // Cria variavel de ambiente
+			else // Cria variavel de ambiente, criar func menor
 			{
 				len = envlen(cmd->env);
 				export = envdup(cmd->env);

@@ -1,6 +1,6 @@
 NAME			=	minishell
 
-UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c arrfree.c ft_isalnum.c)
+UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c arrfree.c ft_isalnum.c get_var.c)
 
 BUILTIN_SRC		=	$(addprefix built-in/, built_in.c pwd.c echo.c cd.c env.c exit.c export.c unset.c)
 
