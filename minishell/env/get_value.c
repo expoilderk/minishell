@@ -6,13 +6,13 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:25:29 by mreis-me          #+#    #+#             */
-/*   Updated: 2023/01/19 16:28:58 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:33:04 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *get_value(char *name, char **env)
+char	*get_value(char *name, char **env)
 {
 	int		len;
 	char	*res;

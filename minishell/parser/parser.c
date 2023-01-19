@@ -12,40 +12,17 @@
 
 #include "../minishell.h"
 
-/*
-void	print_tokens(t_token *token)
+t_cmd	*parser(char *line)
 {
-	while (token)
-	{
-		printf("%s$ == %i\n", token->token, token->type);
-		token = token->next;
-	}
-	printf("==============\n");
-}
-
-void	print_cmd(t_token *token)
-{
-	while (token->type != END)
-	{
-		printf("%s$ == %i\n", token->token, token->type);
-		token = token->next;
-	}
-	printf("==============\n");
-}
-*/
-
-t_cmd *parser(char *line)
-{
-	t_token *token;
-	t_cmd *cmd;
+	t_token	*token;
+	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_cmd));
 	cmd->args = malloc(sizeof(char *) * 10);
-
 	token = lexer(line);
 	free(line);
 
-	// Copia os tokens para o array de comandos
+	/// Copia os tokens para o array de comandos
 	int i = 0;
 	while (token)
 	{
@@ -53,13 +30,7 @@ t_cmd *parser(char *line)
 		token = token->next;
 	}
 	cmd->args[i] = NULL;
-
-	// Busca e executa o built-in
-	// int (*built_in)(t_cmd *) = get_builtin(cmd->args[0]);
-	// if (built_in)
-	// {
-	// 	built_in(cmd);
-	// }
+	// Usado apenas para teste
 
 	// while (token)
 	// {

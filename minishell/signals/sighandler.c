@@ -6,13 +6,13 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 13:47:05 by mreis-me          #+#    #+#             */
-/*   Updated: 2023/01/14 13:47:54 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:30:15 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void sighandler(int sig)
+void	sighandler(int sig)
 {
 	if (sig == SIGINT)
 	{

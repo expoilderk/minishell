@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-int envlen(char **env)
+int	envlen(char **env)
 {
-	int i;
+	int	i;
 
 	if (!env)
 		return (0);
@@ -24,9 +24,9 @@ int envlen(char **env)
 	return (i);
 }
 
-int env_namelen(char *env)
+int	env_namelen(char *env)
 {
-	int i;
+	int	i;
 
 	if (!env)
 		return (0);
@@ -36,10 +36,10 @@ int env_namelen(char *env)
 	return (i);
 }
 
-char **envdup(char **env)
+char	**envdup(char **env)
 {
-	int i;
-	char **new_env;
+	int		i;
+	char	**new_env;
 
 	new_env = malloc(sizeof(char *) * (envlen(env) + 1));
 	if (!new_env)

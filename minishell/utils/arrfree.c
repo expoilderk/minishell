@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-void *arrfree(char **arr)
+void	*arrfree(char **arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return (NULL);
