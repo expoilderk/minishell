@@ -36,22 +36,6 @@ int env_namelen(char *env)
 	return (i);
 }
 
-char *get_env(char *name, char **env)
-{
-	int len;
-
-	if (!name || !env)
-		return (NULL);
-	len = ft_strlen(name);
-	while (*env)
-	{
-		if (!ft_strncmp(*env, name, len))
-			return (*env);
-		env++;
-	}
-	return (NULL);
-}
-
 char **envdup(char **env)
 {
 	int i;

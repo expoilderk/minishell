@@ -1,6 +1,6 @@
 NAME			=	minishell
 
-UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c arrfree.c ft_isalnum.c get_var.c)
+UTILS_SRC		=	$(addprefix utils/, ft_strncmp.c ft_strndup.c ft_strlen.c ft_strchr.c ft_strjoin.c ft_isspace.c ft_whitespace.c arrfree.c ft_isalnum.c)
 
 BUILTIN_SRC		=	$(addprefix built-in/, built_in.c pwd.c echo.c cd.c env.c exit.c export.c unset.c)
 
@@ -14,7 +14,7 @@ LEXER_SRC		=	$(addprefix lexer/, lexer.c lst_token.c create_token.c)
 
 EXECUTOR_SRC	=	$(addprefix executor/, executor.c)
 
-ENV_SRC			=	$(addprefix env/, environ.c)
+ENV_SRC			=	$(addprefix env/, environ.c get_env.c get_var.c get_value.c set_env.c)
 
 MINISHELL_SRC	=	minishell.c
 

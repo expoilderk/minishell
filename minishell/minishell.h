@@ -6,7 +6,7 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:33:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/18 20:08:27 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:24:45 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,18 @@ char	*ft_strjoin(char *s1, char *s2, int option);
 int		ft_isspace(int c);
 int		ft_whitespace(char *str);
 void	*arrfree(char **arr);
-char	*get_var(char *str, char c, int option);
+
 
 //env
+char	*get_env(char *name, char **env);
+char	*get_value(char *name, char **env);
+char	*get_var(char *str, char c, int option);
+int		set_env(t_cmd *cmd, char *var, char *value);
+char	**envdup(char **env);
 int		envlen(char	**env);
 int		env_namelen(char *env);
-char	*get_env(char *name, char **env);
-char	**envdup(char **env);
+
+
 
 // builtin
 int pwd(t_cmd *cmd);

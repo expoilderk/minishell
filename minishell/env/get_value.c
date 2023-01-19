@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 13:33:28 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/19 15:32:37 by mreis-me         ###   ########.fr       */
+/*   Created: 2023/01/19 16:25:29 by mreis-me          #+#    #+#             */
+/*   Updated: 2023/01/19 16:28:58 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(int argc, char **argv, char **envp)
+char *get_value(char *name, char **env)
 {
-	char *line;
-	t_cmd *cmd;
-	char **env;
+	int		len;
+	char	*res;
 
-	(void)argc;
-	(void)argv;
-	env = envdup(envp);
-
-	signals();
-	while (42)
+	if (!name || !env)
+		return (NULL);
+	len = ft_strlen(name);
+	while (*env)
 	{
-		line = prompt();
-		if (!line)
-			sighandler(-1);
-		if (ft_whitespace(line) == 0)
+		if (!ft_strncmp(*env, name, len))
 		{
-			if (!ft_strncmp(line, "exit", -1))
-				return (0);
-			cmd = parser(line);
-			executor(cmd, env);
+			res = ft_strchr(*env, '=');
+			return (++res);
 		}
+		env++;
 	}
-	arrfree(env);
-	if (!cmd)
-		return (1);
-	return (0);
+	return (NULL);
 }
