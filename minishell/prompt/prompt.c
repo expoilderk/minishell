@@ -6,29 +6,89 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:33:22 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/13 23:02:02 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:55:56 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*gethost(void)
+static char	*read_fd(int fd, char *set)
 {
-	return (ft_strndup("hostname", -1));
+	int		bytes;
+	char	buffer[2];
+	char	*output;
+
+	output = NULL;
+	while (1)
+	{
+		bytes = read(fd, buffer, 1);
+		if (bytes == -1)
+			return (NULL);
+		buffer[bytes] = '\0';
+		if (buffer[0] == '\0' || ft_strchr(set, buffer[0]))
+			break ;
+		output = ft_strjoin(output, buffer, 1);
+		if (!output)
+			return (NULL);
+	}
+	return (output);
 }
 
-char	*prompt(void)
+static char	*get_cmd(char *str, char **env)
 {
-	char	*aux;
-	char	*str;
+	int		pipefd[2];
+	char	*output;
+	t_cmd	cmd;
 
-	str = getenv("USER");
-	str = ft_strjoin(str, "@", 0);
-	aux = gethost();
+	cmd.args = ft_split(str, " ");
+	if (!cmd.args)
+		return (NULL);
+	if (pipe(pipefd))
+		return (arrfree(cmd.args));
+	cmd.in = 0;
+	cmd.out = pipefd[1];
+	cmd.next = NULL;
+	if (run_cmd(&cmd, env) == -1)
+		return (arrfree(cmd.args));
+	arrfree(cmd.args);
+	output = read_fd(pipefd[0], "\n");
+	close(pipefd[0]);
+	return (output);
+}
+
+static char	*get_prompt(char **env)
+{
+	char	*str;
+	char	*aux;
+
+	str = get_cmd("/usr/bin/whoami", env);
+	if (!str)
+		return (NULL);
+	str = ft_strjoin(str, "@", 1);
+	if (!str)
+		return (NULL);
+	aux = get_cmd("/bin/hostname", env);
+	if (!aux)
+		return (NULL);
 	str = ft_strjoin(str, aux, 3);
-	str = ft_strjoin(str, "$ ", 1);
-	aux = readline(str);
-	if (ft_whitespace(aux) == 0)
-		add_history(aux);
-	return (aux);
+	if (!str)
+		return (NULL);
+	return (ft_strjoin(str, "$ ", 1));
+}
+
+char	*prompt(char **env)
+{
+	char	*str;
+	char	*line;
+
+	str = get_prompt(env);
+	if (!str)
+		return (NULL);
+	line = readline(str);
+	free(str);
+	if (!line)
+		bt_exit("prompt", env);
+	if (line[0])
+		add_history(line);
+	return (line);
 }

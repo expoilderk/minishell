@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   new_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/11 22:08:41 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/11 22:08:41 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	executor(t_cmd *cmd, char **env)
+t_token	*new_token(char *token)
 {
-	while (cmd)
-	{
-		if (builtin(cmd, env))
-		{
-			cmd = cmd->next;
-			continue ;
-		}
-		cmd = cmd->next;
-	}
-	return (0);
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->token = token;
+	new->type = token_type(token);
+	new->next = NULL;
+	return (new);
 }

@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_token.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 22:08:41 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/11 22:08:41 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/17 15:03:11 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/17 15:03:11 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_token	*new_token(char *token)
+char	*ft_strrchr(char *s, int c)
 {
-	t_token	*new;
+	int	i;
 
-	new = malloc(sizeof(t_token));
-	if (!new)
+	if (!s)
 		return (NULL);
-	new->token = token;
-	new->type = token_type(token);
-	new->next = NULL;
-	return (new);
-}
-
-void	add_token(t_token **token, t_token *new)
-{
-	t_token	*last;
-
-	if (!new)
-		return ;
-	if (!*token)
-	{
-		*token = new;
-		return ;
-	}
-	last = *token;
-	while (last->next)
-		last = last->next;
-	last->next = new;
+	i = ft_strlen(s);
+	while (i && *(s + i) != (char)c)
+		i--;
+	if (*(s + i) == (char)c)
+		return (s + i);
+	return (NULL);
 }

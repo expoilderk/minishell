@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   arrlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/16 19:08:37 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/16 19:08:37 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	executor(t_cmd *cmd, char **env)
+int	arrlen(char	**arr)
 {
-	while (cmd)
-	{
-		if (builtin(cmd, env))
-		{
-			cmd = cmd->next;
-			continue ;
-		}
-		cmd = cmd->next;
-	}
-	return (0);
+	int	i;
+
+	if (!arr)
+		return (0);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

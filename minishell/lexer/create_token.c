@@ -19,26 +19,6 @@ static int	ismetachr(int c)
 	return (0);
 }
 
-static int	quotes_len(char *str)
-{
-	int	len;
-
-	len = 0;
-	if (str[len] == '\'')
-	{
-		len++;
-		while (str[len] && str[len] != '\'')
-			len++;
-	}
-	else if (str[len] == '"')
-	{
-		len++;
-		while (str[len] && str[len] != '"')
-			len++;
-	}
-	return (len);
-}
-
 int	token_type(char *str)
 {
 	if (!str)

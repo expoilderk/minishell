@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   quoteslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:49:53 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/07 15:49:53 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/17 12:22:56 by gguedes           #+#    #+#             */
+/*   Updated: 2023/01/17 12:22:56 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	executor(t_cmd *cmd, char **env)
+int	quotes_len(char *str)
 {
-	while (cmd)
+	int	len;
+
+	if (!str)
+		return (0);
+	len = 0;
+	if (str[len] == '\'')
 	{
-		if (builtin(cmd, env))
-		{
-			cmd = cmd->next;
-			continue ;
-		}
-		cmd = cmd->next;
+		len++;
+		while (str[len] && str[len] != '\'')
+			len++;
 	}
-	return (0);
+	else if (str[len] == '"')
+	{
+		len++;
+		while (str[len] && str[len] != '"')
+			len++;
+	}
+	return (len);
 }

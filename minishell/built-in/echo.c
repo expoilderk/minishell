@@ -6,7 +6,7 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:43:32 by mreis-me          #+#    #+#             */
-/*   Updated: 2023/01/16 20:54:32 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/19 19:54:37 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ static void	print_args(int start, char **argv)
 	}
 }
 
-int	echo(t_cmd *cmd)
+int	bt_echo(char **args)
 {
 	int	newline;
 	int	start;
 
 	newline = 1;
-	start = handle_flag_n(cmd->args);
+	start = handle_flag_n(args);
 	if (start == 2)
 		newline = 0;
-	print_args(start, cmd->args);
+	print_args(start, args);
 	if (newline)
 		printf("\n");
 	return (EXIT_SUCCESS);

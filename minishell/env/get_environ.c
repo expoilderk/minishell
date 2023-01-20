@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   get_environ.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,58 +12,20 @@
 
 #include "../minishell.h"
 
-int envlen(char **env)
+extern char	**environ;
+
+char	**get_environ(void)
 {
-	int i;
+	int		i;
+	char	**new_env;
 
-	if (!env)
-		return (0);
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
-}
-
-int env_namelen(char *env)
-{
-	int i;
-
-	if (!env)
-		return (0);
-	i = 0;
-	while (!ft_isalnum(env[i]) && env[i] != '_')
-		i++;
-	return (i);
-}
-
-char *get_env(char *name, char **env)
-{
-	int len;
-
-	if (!name || !env)
-		return (NULL);
-	len = ft_strlen(name);
-	while (*env)
-	{
-		if (!ft_strncmp(*env, name, len))
-			return (*env);
-		env++;
-	}
-	return (NULL);
-}
-
-char **envdup(char **env)
-{
-	int i;
-	char **new_env;
-
-	new_env = malloc(sizeof(char *) * (envlen(env) + 1));
+	new_env = malloc(sizeof(char *) * (arrlen(environ) + 1));
 	if (!new_env)
 		return (NULL);
 	i = -1;
-	while (env[++i])
+	while (environ[++i])
 	{
-		new_env[i] = ft_strndup(env[i], -1);
+		new_env[i] = ft_strndup(environ[i], -1);
 		if (!new_env[i])
 			return (arrfree(new_env));
 	}

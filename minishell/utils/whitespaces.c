@@ -1,43 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   whitespaces.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@42.student.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 10:51:02 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/17 12:39:13 by gguedes          ###   ########.fr       */
+/*   Created: 2023/01/14 13:44:41 by mreis-me          #+#    #+#             */
+/*   Updated: 2023/01/17 12:24:23 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	copy(char *s1, char *s2, char *dest)
+char	*whitespaces(char *str)
 {
-	if (s1)
-	{
-		while (*s1)
-			*dest++ = *s1++;
-	}
-	if (s2)
-	{
-		while (*s2)
-			*dest++ = *s2++;
-	}
-	*dest = '\0';
-}
-
-char	*ft_strjoin(char *s1, char *s2, int option)
-{
-	char	*new_str;
-
-	new_str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!new_str)
+	if (!str)
 		return (NULL);
-	copy(s1, s2, new_str);
-	if (option == 1 || option == 3)
-		free(s1);
-	if (option == 2 || option == 3)
-		free(s2);
-	return (new_str);
+	while (*str && ft_strchr(" \n\t", *str))
+		str++;
+	return (str);
 }

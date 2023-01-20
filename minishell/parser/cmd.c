@@ -29,10 +29,48 @@ void	next_cmd(t_token **token)
 	free(tmp);
 }
 
-//create the cmd struct, opening redirects or heredocs
+int	add_cmd(t_cmd **cmd, t_cmd *new)
+{
+	t_cmd	*last;
+
+	if (!new)
+		return (1);
+	if (!*cmd)
+	{
+		*cmd = new;
+		return (0);
+	}
+	last = *cmd;
+	while (last->next)
+		last = last->next;
+	last->next = new;
+	return (0);
+}
+
 t_cmd	*create_cmd(t_token *token)
 {
-	if (!token)
+	int		i;
+	t_cmd	*cmd;
+
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
 		return (NULL);
-	return (NULL);
+	cmd->args = malloc(sizeof(char *) * (redirect(cmd, token) + 1));
+	if (!cmd->args)
+	{
+		free(cmd);
+		return (NULL);
+	}
+	i = 0;
+	while (token->type != END)
+	{
+		if (token->type == REDIR)
+			token = token->next;
+		else
+			cmd->args[i++] = ft_strndup(token->token, -1);
+		token = token->next;
+	}
+	cmd->args[i] = NULL;
+	cmd->next = NULL;
+	return (cmd);
 }

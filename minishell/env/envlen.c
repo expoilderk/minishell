@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   envlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 13:55:11 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/19 20:09:05 by mreis-me         ###   ########.fr       */
+/*   Created: 2023/01/19 20:29:48 by mreis-me          #+#    #+#             */
+/*   Updated: 2023/01/19 20:29:52 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	bt_pwd(char **args)
+int	envlen(char **env)
 {
-	char	*str;
+	int	i;
 
-	(void)args;
-	str = getcwd(NULL, 0);
-	printf("%s\n", str);
-	free(str);
-	return (EXIT_SUCCESS);
+	if (!env)
+		return (0);
+	i = 0;
+	while (env[i])
+		i++;
+	return (i);
 }
