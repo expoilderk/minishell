@@ -30,6 +30,6 @@ t_cmd	*parser(char *line)
 			return (NULL);
 		next_cmd(&token);
 	}
-	// print_cmd(cmd);
+	print_cmd(cmd);
 	return (cmd);
 }

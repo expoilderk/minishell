@@ -6,7 +6,7 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:33:28 by gguedes           #+#    #+#             */
-/*   Updated: 2023/01/19 21:30:31 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:39:20 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 	{
 		shell.line = prompt(shell.env);
 		shell.cmd = parser(shell.line);
-		executor(shell.cmd, shell.env);
+		// executor(shell.cmd, shell.env);
 	}
 	return (0);
 }

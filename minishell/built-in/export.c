@@ -6,7 +6,7 @@
 /*   By: mreis-me <mreis-me@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 11:50:35 by mreis-me          #+#    #+#             */
-/*   Updated: 2023/01/19 22:08:37 by mreis-me         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:30:37 by mreis-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int	bt_export(char **args, char **env)
 		else if (validate(args[i]) == 1)
 		{
 			var = get_var(args[i], '=', 1);
-			printf("var: %s\n", var);
 			value = ft_strchr(args[i], '=');
-			printf("value: %s\n", value);
 			set_env(env, var, ++value);
 			free(var);
 		}

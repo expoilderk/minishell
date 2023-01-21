@@ -40,7 +40,7 @@ int	redirect(t_cmd *cmd, t_token *token)
 	while (token->type != END)
 	{
 		if (token->type == REDIR)
-		{			
+		{
 			redir_type(cmd, token);
 			token = token->next;
 		}
@@ -48,5 +48,5 @@ int	redirect(t_cmd *cmd, t_token *token)
 			i++;
 		token = token->next;
 	}
-	return (0);
+	return (i);
 }
