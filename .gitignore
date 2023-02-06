@@ -1,0 +1,9 @@
+valgrind-out.txt*
+
+minishell.dSYM
+
+.vscode
+
+minishell
+
+*.o
